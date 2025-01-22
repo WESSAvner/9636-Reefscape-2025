@@ -7,21 +7,21 @@
   "drive": {
     "type": "sparkmax_neo",
     "id": 10,
-    "canbus": 0
+    "canbus": null
   },
   "angle": {
     "type": "sparkmax_neo",
     "id": 9,
-    "canbus": 0
+    "canbus": null
   },
   "encoder": {
-    "type": "sparkmax_analog",
-    "id": 9,
-    "canbus": 0
+    "type": "attached",
+    "id": 0,
+    "canbus": null
   },
   "inverted": {
-    "drive": false,
-    "angle": false
+    "drive": true,
+    "angle": true
   },
-  "absoluteEncoderInverted": false
+  "absoluteEncoderInverted": true
 }

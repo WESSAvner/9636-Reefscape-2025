@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
@@ -156,6 +157,8 @@ public class RobotContainer
       driverPS4.R1().onTrue(Commands.none());
     } else
     {
+      drivebase.setDefaultCommand(driveFieldOrientedDirectAngle);
+      
       driverPS4.square().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverPS4.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverPS4.triangle().whileTrue(
