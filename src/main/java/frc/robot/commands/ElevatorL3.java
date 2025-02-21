@@ -4,11 +4,10 @@
 // import frc.robot.subsystems.ElevatorSubsystem;
 // import frc.robot.Constants;
 
-
-// public class ElevatorL2 extends Command {
+// public class ElevatorL3 extends Command {
 //     public final ElevatorSubsystem elevator;
 
-//     public ElevatorL2(ElevatorSubsystem elevatorCommand) {
+//     public ElevatorL3(ElevatorSubsystem elevatorCommand) {
 
 //         elevator = elevatorCommand;
 
@@ -17,7 +16,7 @@
 //     @Override
 //     public void initialize() {
 
-//         elevator.setPositionInches(Constants.levelTwoHeight);
+//         elevator.setPositionInches(Constants.levelThreeHeight);
 //     }
 
 //     @Override

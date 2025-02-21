@@ -26,6 +26,9 @@ import java.io.File;
 import swervelib.SwerveInputStream;
 // import frc.robot.subsystems.ElevatorSubsystem;
 // import frc.robot.commands.ElevatorL2; 
+// import frc.robot.commands.ElevatorL3; 
+// import frc.robot.commands.ElevatorResting; 
+
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -35,8 +38,10 @@ import swervelib.SwerveInputStream;
 public class RobotContainer
 {
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  final         CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
+  // Replace with CommandPS4Controller or CommandJoystick if needed (done)
+  final CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
+  final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
+
   // public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
@@ -140,6 +145,9 @@ public class RobotContainer
   private void configureBindings()
   {
     // (Condition) ? Return-On-True : Return-on-False
+    // This whole configureBindings() thing is fucked. it checks if you are in a simulation, in test, or
+    // teleop, and gives different bindings. point is, only look at the "else" section, because it is the only one
+    // that relates to being in teleop.
     drivebase.setDefaultCommand(!RobotBase.isSimulation() ?
                                 driveFieldOrientedAnglularVelocity :
                                 driveFieldOrientedAnglularVelocitySim);
@@ -162,20 +170,24 @@ public class RobotContainer
       driverPS4.R1().onTrue(Commands.none());
     } else
     {
+      // Sets control scheme to be AngularVelocity, or DirectAngle.
       drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity);
       
+      // https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/CommandPS4Controller.html
+      // all worship the PS4 Command base docuemntation.
+
       driverPS4.square().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverPS4.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverPS4.triangle().whileTrue(
           drivebase.driveToPose(
               new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               );
-      driverPS4.options().whileTrue(Commands.none());
-      driverPS4.share().whileTrue(Commands.none());
       driverPS4.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
-      driverPS4.R1().onTrue(Commands.none());
 
-      // driverPS4.povUp().onTrue(new ElevatorL2(elevator));
+      // Gives the operator elevator control.
+      // operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
+      // operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
+      // operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
     }
 
   }

@@ -1,14 +1,14 @@
 // package frc.robot.commands;
 
 // import edu.wpi.first.wpilibj2.command.Command;
-// import frc.robot.subsystems.ElevatorSubsystem;
 // import frc.robot.Constants;
+// import frc.robot.subsystems.ElevatorSubsystem;
 
 
-// public class ElevatorL2 extends Command {
+// public class ElevatorResting extends Command {
 //     public final ElevatorSubsystem elevator;
 
-//     public ElevatorL2(ElevatorSubsystem elevatorCommand) {
+//     public ElevatorResting(ElevatorSubsystem elevatorCommand) {
 
 //         elevator = elevatorCommand;
 
@@ -17,7 +17,7 @@
 //     @Override
 //     public void initialize() {
 
-//         elevator.setPositionInches(Constants.levelTwoHeight);
+//         elevator.setPositionInches(Constants.restingHeight);
 //     }
 
 //     @Override
