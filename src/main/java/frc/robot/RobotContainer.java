@@ -20,12 +20,12 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
-import frc.robot.subsystems.ElevatorSubsystem;
+// import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.commands.ElevatorL2; 
+// import frc.robot.subsystems.ElevatorSubsystem;
+// import frc.robot.commands.ElevatorL2; 
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -37,7 +37,7 @@ public class RobotContainer
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
   final         CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
-  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  // public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve"));
@@ -152,7 +152,7 @@ public class RobotContainer
     }
     if (DriverStation.isTest())
     {
-      drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity); // Overrides drive command above!
+      drivebase.setDefaultCommand(driveFieldOrientedDirectAngle); // Overrides drive command above!
 
       driverPS4.square().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverPS4.triangle().whileTrue(drivebase.driveToDistanceCommand(1.0, 0.2));
@@ -175,7 +175,7 @@ public class RobotContainer
       driverPS4.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverPS4.R1().onTrue(Commands.none());
 
-      driverPS4.povUp().onTrue(new ElevatorL2(elevator));
+      // driverPS4.povUp().onTrue(new ElevatorL2(elevator));
     }
 
   }
