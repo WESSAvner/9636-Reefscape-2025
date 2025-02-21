@@ -65,7 +65,7 @@ public class RobotContainer
    */
   SwerveInputStream driveAngularVelocity = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                 () -> driverPS4.getLeftY() * -1,
-                                                                () -> driverPS4.getLeftX() * -1)
+                                                                () -> driverPS4.getLeftX() * 1)
                                                             .withControllerRotationAxis(driverPS4::getRightX)
                                                             .deadband(OperatorConstants.DEADBAND)
                                                             .scaleTranslation(0.8)
@@ -97,7 +97,7 @@ public class RobotContainer
 
   SwerveInputStream driveAngularVelocitySim = SwerveInputStream.of(drivebase.getSwerveDrive(),
                                                                    () -> -driverPS4.getLeftY(),
-                                                                   () -> -driverPS4.getLeftX())
+                                                                   () -> -driverPS4.getLeftX() * -1)
                                                                .withControllerRotationAxis(() -> driverPS4.getRawAxis(2))
                                                                .deadband(OperatorConstants.DEADBAND)
                                                                .scaleTranslation(0.8)
@@ -162,7 +162,7 @@ public class RobotContainer
       driverPS4.R1().onTrue(Commands.none());
     } else
     {
-      drivebase.setDefaultCommand(driveFieldOrientedDirectAngle);
+      drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity);
       
       driverPS4.square().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverPS4.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
