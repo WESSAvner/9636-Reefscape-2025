@@ -3,15 +3,16 @@
     "front": 13.25,
     "left": 13.25
   },
+  
   "absoluteEncoderOffset": 0,
   "drive": {
     "type": "sparkflex_vortex",
-    "id": 32,
+    "id": 22,
     "canbus": null
   },
   "angle": {
     "type": "sparkmax_neo550",
-    "id": 31,
+    "id": 21,
     "canbus": null
   },
   "encoder": {
