@@ -24,10 +24,10 @@ import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
-// import frc.robot.subsystems.ElevatorSubsystem;
-// import frc.robot.commands.ElevatorL2; 
-// import frc.robot.commands.ElevatorL3; 
-// import frc.robot.commands.ElevatorResting; 
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.ElevatorL2; 
+import frc.robot.commands.ElevatorL3; 
+import frc.robot.commands.ElevatorResting; 
 
 
 /**
@@ -42,7 +42,7 @@ public class RobotContainer
   final CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
   final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
 
-  // public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve"));
@@ -174,7 +174,7 @@ public class RobotContainer
       drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity);
       
       // https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/CommandPS4Controller.html
-      // all worship the PS4 Command base docuemntation.
+      // all worship the PS4 Command base docuemntation. Open on Windows if MACOS does not work.
 
       driverPS4.square().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverPS4.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
@@ -185,9 +185,9 @@ public class RobotContainer
       driverPS4.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
       // Gives the operator elevator control.
-      // operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
-      // operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
-      // operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
+      operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
+      operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
+      operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
     }
 
   }
