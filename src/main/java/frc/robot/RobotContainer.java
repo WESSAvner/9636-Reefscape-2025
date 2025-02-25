@@ -27,7 +27,12 @@ import swervelib.SwerveInputStream;
 import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.commands.ElevatorL2; 
 import frc.robot.commands.ElevatorL3; 
-import frc.robot.commands.ElevatorResting; 
+import frc.robot.commands.ElevatorResting;
+import frc.robot.commands.AlgaeIntakeIn;
+import frc.robot.commands.AlgaeIntakeOut;
+import frc.robot.subsystems.AlgaeIntake;
+import frc.robot.subsystems.CoralIntake;
+
 
 
 /**
@@ -43,6 +48,9 @@ public class RobotContainer
   final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
 
   public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  public static final AlgaeIntake algaeIntake = new AlgaeIntake();
+  public static final CoralIntake coralIntake = new CoralIntake();
+
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve"));
@@ -176,7 +184,7 @@ public class RobotContainer
       // https://github.wpilib.org/allwpilib/docs/release/java/edu/wpi/first/wpilibj2/command/button/CommandPS4Controller.html
       // all worship the PS4 Command base docuemntation. Open on Windows if MACOS does not work.
 
-      driverPS4.square().onTrue((Commands.runOnce(drivebase::zeroGyro)));
+      driverPS4.share().onTrue((Commands.runOnce(drivebase::zeroGyro)));
       driverPS4.square().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverPS4.triangle().whileTrue(
           drivebase.driveToPose(
@@ -188,6 +196,11 @@ public class RobotContainer
       operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
       operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
       operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
+
+      operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
+      operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
+
+
     }
 
   }

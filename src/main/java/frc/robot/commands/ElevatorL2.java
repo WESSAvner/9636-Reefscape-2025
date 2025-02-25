@@ -6,18 +6,18 @@ import frc.robot.Constants;
 
 
 public class ElevatorL2 extends Command {
-    public final ElevatorSubsystem elevator;
+    public final ElevatorSubsystem elevatorL2;
 
     public ElevatorL2(ElevatorSubsystem elevatorCommand) {
 
-        elevator = elevatorCommand;
+        elevatorL2 = elevatorCommand;
 
     }
 
     @Override
     public void initialize() {
 
-        elevator.setPositionInches(Constants.levelTwoHeight);
+        elevatorL2.setPositionInches(Constants.levelTwoHeight);
     }
 
     @Override

@@ -6,18 +6,18 @@ import frc.robot.subsystems.ElevatorSubsystem;
 
 
 public class ElevatorResting extends Command {
-    public final ElevatorSubsystem elevator;
+    public final ElevatorSubsystem elevatorResting;
 
     public ElevatorResting(ElevatorSubsystem elevatorCommand) {
 
-        elevator = elevatorCommand;
+        elevatorResting = elevatorCommand;
 
     }
 
     @Override
     public void initialize() {
 
-        elevator.setPositionInches(Constants.restingHeight);
+        elevatorResting.setPositionInches(Constants.restingHeight);
     }
 
     @Override
