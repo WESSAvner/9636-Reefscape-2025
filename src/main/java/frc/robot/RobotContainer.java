@@ -14,7 +14,6 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
-import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -30,6 +29,7 @@ import frc.robot.commands.ElevatorL3;
 import frc.robot.commands.ElevatorResting;
 import frc.robot.commands.AlgaeIntakeIn;
 import frc.robot.commands.AlgaeIntakeOut;
+import frc.robot.commands.AngleSet;
 import frc.robot.subsystems.AlgaeIntake;
 import frc.robot.subsystems.CoralIntake;
 
@@ -199,6 +199,9 @@ public class RobotContainer
 
       operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
       operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
+
+      operatorPS4.R1().onTrue(new AngleSet(coralIntake, 0));
+      operatorPS4.L1().onTrue(new AngleSet(coralIntake, -30));
 
 
     }

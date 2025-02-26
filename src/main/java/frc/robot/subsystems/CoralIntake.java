@@ -31,7 +31,7 @@ public class CoralIntake extends SubsystemBase {
     
 
     pid = new ProfiledPIDController(0.1, 0,0, new Constraints(0.5, 2));
-    pid.enableContinuousInput(0, 1);
+    // pid.enableContinuousInput(0, 1);
 
     setTargetPosition(targetPosition);
 
