@@ -19,19 +19,18 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
-// import frc.robot.subsystems.ElevatorSubsystem;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
-import frc.robot.subsystems.ElevatorSubsystem;
-import frc.robot.commands.ElevatorL2; 
-import frc.robot.commands.ElevatorL3; 
-import frc.robot.commands.ElevatorResting;
-import frc.robot.commands.AlgaeIntakeIn;
-import frc.robot.commands.AlgaeIntakeOut;
-import frc.robot.commands.AngleSet;
-import frc.robot.subsystems.AlgaeIntake;
-import frc.robot.subsystems.CoralIntake;
+// import frc.robot.subsystems.ElevatorSubsystem;
+// import frc.robot.commands.ElevatorL2; 
+// import frc.robot.commands.ElevatorL3; 
+// import frc.robot.commands.ElevatorResting;
+// import frc.robot.commands.AlgaeIntakeIn;
+// import frc.robot.commands.AlgaeIntakeOut;
+// import frc.robot.commands.AngleSet;
+// import frc.robot.subsystems.AlgaeIntake;
+// import frc.robot.subsystems.CoralIntake;
 
 
 
@@ -47,9 +46,9 @@ public class RobotContainer
   final CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
   final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
 
-  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
-  public static final AlgaeIntake algaeIntake = new AlgaeIntake();
-  public static final CoralIntake coralIntake = new CoralIntake();
+  // public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  // public static final AlgaeIntake algaeIntake = new AlgaeIntake();
+  // public static final CoralIntake coralIntake = new CoralIntake();
 
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
@@ -193,15 +192,15 @@ public class RobotContainer
       driverPS4.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
       // Gives the operator elevator control.
-      operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
-      operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
-      operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
+      // operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
+      // operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
+      // operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
 
-      operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
-      operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
+      // operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
+      // operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
 
-      operatorPS4.R1().onTrue(new AngleSet(coralIntake, 0));
-      operatorPS4.L1().onTrue(new AngleSet(coralIntake, -30));
+      // operatorPS4.R1().onTrue(new AngleSet(coralIntake, 0));
+      // operatorPS4.L1().onTrue(new AngleSet(coralIntake, -30));
 
 
     }
