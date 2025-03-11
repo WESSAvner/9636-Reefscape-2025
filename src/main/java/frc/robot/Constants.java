@@ -27,6 +27,9 @@ public final class Constants
   public static final double levelThreeHeight = 30;
   public static final double levelTwoHeight = 20;
   public static final double restingHeight = 0;
+
+  public static final double coralDefaultAngle = 35;
+  public static final double coralAngle50 = 100;
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
 //  public static final class AutonConstants
