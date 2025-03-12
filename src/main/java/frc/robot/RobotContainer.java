@@ -46,7 +46,7 @@ public class RobotContainer
   final CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
   final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
 
-  // public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
+  public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   // public static final AlgaeIntake algaeIntake = new AlgaeIntake();
   // public static final CoralIntake coralIntake = new CoralIntake();
 
