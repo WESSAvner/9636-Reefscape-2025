@@ -22,10 +22,10 @@ import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
-// import frc.robot.subsystems.ElevatorSubsystem;
-// import frc.robot.commands.ElevatorL2; 
-// import frc.robot.commands.ElevatorL3; 
-// import frc.robot.commands.ElevatorResting;
+import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.ElevatorL2; 
+import frc.robot.commands.ElevatorL3; 
+import frc.robot.commands.ElevatorResting;
 // import frc.robot.commands.AlgaeIntakeIn;
 // import frc.robot.commands.AlgaeIntakeOut;
 // import frc.robot.commands.AngleSet;
@@ -192,9 +192,9 @@ public class RobotContainer
       driverPS4.L1().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
 
       // Gives the operator elevator control.
-      // operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
-      // operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
-      // operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
+      operatorPS4.povUp().onTrue(new ElevatorL3(elevator));
+      operatorPS4.povRight().onTrue(new ElevatorL2(elevator));
+      operatorPS4.povDown().onTrue(new ElevatorResting(elevator));
 
       // operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
       // operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
