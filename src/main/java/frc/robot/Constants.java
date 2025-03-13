@@ -24,8 +24,9 @@ public final class Constants
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
   public static final double MAX_SPEED  = Units.feetToMeters(14.5);
 
-  public static final double levelThreeHeight = 30;
-  public static final double levelTwoHeight = 20;
+  public static final double countsPerInch = 1;
+  public static final double levelThreeHeight = 6;
+  public static final double levelTwoHeight = 3;
   public static final double restingHeight = 0;
 
   public static final double coralDefaultAngle = 35;

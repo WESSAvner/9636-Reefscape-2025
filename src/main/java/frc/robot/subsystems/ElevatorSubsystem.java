@@ -13,6 +13,7 @@ import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class ElevatorSubsystem extends SubsystemBase {
     private SparkMax primaryMotor = new SparkMax(3, MotorType.kBrushless);
@@ -21,7 +22,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     private DigitalInput bottomLimit = new DigitalInput(5);
 
     private PIDController pidController = new PIDController(
-        0.1,
+        0.01,
         0,
         0.01
     );
@@ -29,7 +30,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // private TrapezoidProfile.Constraints constraints;
     private TrapezoidProfile.State goalState = new TrapezoidProfile.State();
     private TrapezoidProfile.State currentState = new TrapezoidProfile.State();
-    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(20, 3));
+    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(5, 1));
 
     private ElevatorPosition currentTarget = ElevatorPosition.DOWN;
     private boolean isHomed = false;
@@ -52,7 +53,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     }
 
     public void Elevator() {
-        // SparkMax primaryMotor = new SparkMax(3, MotorType.kBrushless);
+        //SparkMax primaryMotor = new SparkMax(3, MotorType.kBrushless);
         //SparkMax followerMotor = new SparkMax(4, MotorType.kBrushless);
         
         SparkMaxConfig followerConfig = new SparkMaxConfig();
@@ -94,22 +95,23 @@ public class ElevatorSubsystem extends SubsystemBase {
         primaryMotor.configure(resetConfig, ResetMode.kResetSafeParameters, null);
         
         // Follower motor configuration
-        primaryMotor.configure(resetConfig, ResetMode.kResetSafeParameters, null);
+        // followerMotor.configure(resetConfig, ResetMode.kResetSafeParameters, null);
     }
 
     @Override
     public void periodic() {
 
-        currentPos = encoder.getPosition() / 4334;
+
+        currentPos = encoder.getPosition() / Constants.countsPerInch;
         
         // Calculate the next state and update current state
         currentState = profile.calculate(0.020, currentState, goalState); // 20ms control loop
 
-        if (bottomLimit.get()) {
+        if (currentPos < 0.05) {
             handleBottomLimit();
         }
 
-        if (getHeightInches() > 67) {
+        if (getHeightInches() > 40) {
             stopMotors();
         }
 
@@ -133,9 +135,9 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     private void handleBottomLimit() {
         stopMotors();
-        encoder.setPosition(0 * 4334);
+        // encoder.setPosition(0 * Constants.countsPerInch);
         isHomed = true;
-        setpoint = 0;
+        setpoint = 0;  
         currentState = new TrapezoidProfile.State(0, 0);
         goalState = new TrapezoidProfile.State(0, 0);
         pidController.reset();
@@ -163,18 +165,22 @@ public class ElevatorSubsystem extends SubsystemBase {
     // Sets position in inches (AMERICA RAAAAAAAHHHH)
     public void setPositionInches(double inches) {
         if (!isHomed && inches > 0) {
-            //System.out.println("Warning: Elevator not homed! Home first before moving to positions.");
+            System.out.println("Warning: Elevator not homed! Home first before moving to positions.");
             return;
         }
 
         setpoint = MathUtil.clamp(
             inches,
             0,
-            67
+            40
         );
         
         // Update goal state for motion profile
         goalState = new TrapezoidProfile.State(setpoint, 0);
+    }
+
+    public double getHeightInches() {
+        return encoder.getPosition() / Constants.countsPerInch;
     }
 
     private void updateTelemetry() {
@@ -186,9 +192,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("Elevator Velocity", currentState.velocity);
     }
 
-    public double getHeightInches() {
-        return encoder.getPosition() / 4334;
-    }
+
 
     public void homeElevator() {
         primaryMotor.set(-0.1); // Slow downward movement until bottom limit is hit
