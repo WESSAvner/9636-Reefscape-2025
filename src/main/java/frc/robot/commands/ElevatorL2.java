@@ -11,7 +11,7 @@ public class ElevatorL2 extends Command {
     public ElevatorL2(ElevatorSubsystem elevatorCommand) {
 
         elevatorL2 = elevatorCommand;
-
+        addRequirements(elevatorCommand);
     }
 
     @Override
@@ -22,14 +22,14 @@ public class ElevatorL2 extends Command {
 
     @Override
     public void execute() {
-
+        
+        System.out.println("Elevator moving to Level 2...");
 
     }
 
     @Override
     public boolean isFinished() {
-      
-      return false;
+        return elevatorL2.isAtHeight(Constants.levelTwoHeight);
     }
   
     @Override
