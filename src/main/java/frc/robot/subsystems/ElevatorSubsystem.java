@@ -1,5 +1,7 @@
 package frc.robot.subsystems;
 
+import javax.security.auth.callback.ConfirmationCallback;
+
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
@@ -27,6 +29,14 @@ public class ElevatorSubsystem extends SubsystemBase {
         0.01
     );
 
+    public ElevatorSubsystem() {
+        if (!motorsConfigured) {
+            configureMotors();
+            motorsConfigured = true;
+        }
+    }
+    
+
     // private TrapezoidProfile.Constraints constraints;
     private TrapezoidProfile.State goalState = new TrapezoidProfile.State();
     private TrapezoidProfile.State currentState = new TrapezoidProfile.State();
@@ -37,6 +47,11 @@ public class ElevatorSubsystem extends SubsystemBase {
     private double setpoint = 0.0;
     SparkMaxConfig resetConfig = new SparkMaxConfig();
     double currentPos;
+
+    boolean motorsConfigured = false;
+
+    
+
 
     public enum ElevatorPosition {
         DOWN(0),
@@ -52,55 +67,35 @@ public class ElevatorSubsystem extends SubsystemBase {
         }
     }
 
-    public void Elevator() {
-        //SparkMax primaryMotor = new SparkMax(3, MotorType.kBrushless);
-        //SparkMax followerMotor = new SparkMax(4, MotorType.kBrushless);
-        
-        SparkMaxConfig followerConfig = new SparkMaxConfig();
-        followerConfig.follow(primaryMotor, true);
 
-        // Configure follower
-        followerMotor.configure(followerConfig, null, null); 
-        
-        // encoder
-        // bottomLimit = new DigitalInput(5);
+    
+    private void configureMotors() {
 
+        pidController.setTolerance(0.5);
+
+        // Primary motor configuration
         resetConfig.idleMode(IdleMode.kBrake);
         resetConfig.smartCurrentLimit(40);
         resetConfig.voltageCompensation(12.0);
-
-        // constraints = new TrapezoidProfile.Constraints(
-        //     20,
-        //     3
-        // );
-        
-        // PIDController pidController = new PIDController(
-        //     0.1,
-        //     0,
-        //     0.01
-        // );
-        
-        pidController.setTolerance(0.5); // 0.5 inches position tolerance
-        
-        // Initialize states and profile
-        currentState = new TrapezoidProfile.State(0, 0);
-        goalState = new TrapezoidProfile.State(0, 0);
-        // TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(20, 3));
-        
-        configureMotors();
-    }
-
-    private void configureMotors() {
-        // Primary motor configuration
         primaryMotor.configure(resetConfig, ResetMode.kResetSafeParameters, null);
+
+        SparkMaxConfig followerConfig = new SparkMaxConfig();
+        followerConfig.follow(primaryMotor, true);
+        followerMotor.configure(followerConfig, null, null); 
         
         // Follower motor configuration
         // followerMotor.configure(resetConfig, ResetMode.kResetSafeParameters, null);
     }
-
+   
     @Override
     public void periodic() {
 
+        // Configures motors at start.
+  
+
+        if (!isHomed && bottomLimit.get()) {
+            handleBottomLimit();
+        }
 
         currentPos = encoder.getPosition() / Constants.countsPerInch;
         
@@ -195,9 +190,8 @@ public class ElevatorSubsystem extends SubsystemBase {
 
 
     public void homeElevator() {
-        primaryMotor.set(-0.1); // Slow downward movement until bottom limit is hit
-        if (bottomLimit.get()) {
-            handleBottomLimit();
+        if (!isHomed) {
+            primaryMotor.set(-0.1); // Slow downward movement
         }
     }
 
