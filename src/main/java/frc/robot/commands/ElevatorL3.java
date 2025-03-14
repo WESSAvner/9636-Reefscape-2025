@@ -10,6 +10,7 @@ public class ElevatorL3 extends Command {
     public ElevatorL3(ElevatorSubsystem elevatorCommand) {
 
         elevatorL3 = elevatorCommand;
+        addRequirements(elevatorCommand);
 
     }
 
@@ -22,13 +23,13 @@ public class ElevatorL3 extends Command {
     @Override
     public void execute() {
 
+        System.out.println("Elevator moving to Level 3...");
 
     }
 
     @Override
     public boolean isFinished() {
-      
-      return false;
+        return elevatorL3.isAtHeight(Constants.levelThreeHeight);
     }
   
     @Override

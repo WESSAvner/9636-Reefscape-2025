@@ -11,6 +11,7 @@ public class ElevatorResting extends Command {
     public ElevatorResting(ElevatorSubsystem elevatorCommand) {
 
         elevatorResting = elevatorCommand;
+        addRequirements(elevatorCommand);
 
     }
 
@@ -22,14 +23,12 @@ public class ElevatorResting extends Command {
 
     @Override
     public void execute() {
-
-
+        System.out.println("Elevator moving to Base Height...");
     }
 
     @Override
     public boolean isFinished() {
-      
-      return false;
+        return elevatorResting.isAtHeight(Constants.restingHeight);
     }
   
     @Override

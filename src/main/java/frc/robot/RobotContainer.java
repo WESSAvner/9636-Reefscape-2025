@@ -46,13 +46,18 @@ public class RobotContainer
   final CommandPS4Controller driverPS4 = new CommandPS4Controller(0);
   final CommandPS4Controller operatorPS4 = new CommandPS4Controller(1);
 
+  // instantiates the subsystems into RobotContainer.
   public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
   // public static final AlgaeIntake algaeIntake = new AlgaeIntake();
   // public static final CoralIntake coralIntake = new CoralIntake();
 
   // The robot's subsystems and commands are defined here...
-  private final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
+  public static final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                                 "swerve"));
+                                                                              
+  public SwerveSubsystem getSwerveSubsystem() {   
+    return drivebase;
+  }
   // Applies deadbands and inverts controls because joysticks
   // are back-right positive while robot
   // controls are front-left positive

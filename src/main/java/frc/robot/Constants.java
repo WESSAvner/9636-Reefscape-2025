@@ -29,6 +29,15 @@ public final class Constants
   public static final double levelTwoHeight = 3;
   public static final double restingHeight = 0;
 
+  public static final double elevatorkP = 0.1;
+  public static final double elevatorkI = 0;
+  public static final double elevatorkD = 0.01;
+  public static final double elevatorkS = 0.01;
+  public static final double elevatorkG = 0.1;
+
+  public static final double elevatorMaxHeight = 10;
+  public static final double elevatorPIDLoopTime = 0.020;
+
   public static final double coralDefaultAngle = 35;
   public static final double coralAngle50 = 100;
   // Maximum speed of the robot in meters per second, used to limit acceleration.
