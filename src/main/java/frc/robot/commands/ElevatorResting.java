@@ -19,6 +19,7 @@ public class ElevatorResting extends Command {
     public void initialize() {
 
         elevatorResting.setPositionInches(Constants.restingHeight);
+
     }
 
     @Override

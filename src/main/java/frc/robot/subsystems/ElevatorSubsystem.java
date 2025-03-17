@@ -47,7 +47,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     private ElevatorPosition currentTarget = ElevatorPosition.DOWN;
     private boolean isHomed = false;
-    private double setpoint = 0.0;
+    public static double setpoint = 0.0;
     SparkMaxConfig resetConfig = new SparkMaxConfig();
     double currentPos;
 
@@ -110,9 +110,9 @@ public class ElevatorSubsystem extends SubsystemBase {
         currentState = profile.calculate(Constants.elevatorPIDLoopTime, currentState, goalState); // 20ms control loop
 
         // handles bottom limit if position is close to zero
-        if (currentPos < 0.05) {
-            handleBottomLimit();
-        }
+        // if (currentPos < 0.05) {
+        //     handleBottomLimit();
+        // }
 
         // Stops the motors if the height gets too far. may we all pray this works /\
         if (getHeightInches() > 10) {
@@ -126,11 +126,7 @@ public class ElevatorSubsystem extends SubsystemBase {
             double ff = calculateFeedForward(currentState);
             
             // clamps the output power to be between -0.5 and 0.5 so no one dies
-            double outputPower = MathUtil.clamp(
-                pidOutput + ff,
-                -0.5,
-                0.5
-            );
+            double outputPower = pidOutput + ff;
             
             // takes the resulting output power and powers the motor
             primaryMotor.set(outputPower);
@@ -175,7 +171,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     // This takes in a value (inches) and changes the setpoint that is to be the goalState
     public void setPositionInches(double inches) {
-
+        System.out.println("Setting Elevator Setpoint: " + inches);
         // Gives warning if elevator is not homed to console
         if (!isHomed && inches > 0) {
             System.out.println("Warning: Elevator not homed! Home first before moving to positions.");
@@ -191,6 +187,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         
         // Update goal state for motion profile
         goalState = new TrapezoidProfile.State(setpoint, 0);
+        System.out.println("Updated goal state: " + goalState);
     }
 
     // gets the current height of the carrage.
@@ -206,6 +203,7 @@ public class ElevatorSubsystem extends SubsystemBase {
         SmartDashboard.putString("Elevator State", currentTarget.toString());
         SmartDashboard.putNumber("Elevator Current", primaryMotor.getOutputCurrent());
         SmartDashboard.putNumber("Elevator Velocity", currentState.velocity);
+
     }
 
 
