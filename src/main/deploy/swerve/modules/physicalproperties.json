@@ -3,7 +3,7 @@
   "robotMass": 20,
   "wheelGripCoefficientOfFriction": 1.19,
   "currentLimit": {
-    "drive": 40,
+    "drive": 45,
     "angle": 20
   },
   "conversionFactors": {

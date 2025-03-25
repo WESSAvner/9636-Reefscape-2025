@@ -24,18 +24,18 @@ public final class Constants
   public static final double LOOP_TIME  = 0.13; //s, 20ms + 110ms sprk max velocity lag
   public static final double MAX_SPEED  = Units.feetToMeters(14.5);
 
-  public static final double countsPerInch = 1;
-  public static final double levelThreeHeight = 6;
-  public static final double levelTwoHeight = 3;
+  public static final double countsPerInch = 4;
+  public static final double levelThreeHeight = 14;
+  public static final double levelTwoHeight = 6.5;
   public static final double restingHeight = 0;
 
-  public static final double elevatorkP = 0.4;
+  public static final double elevatorkP = 1;
   public static final double elevatorkI = 0;
-  public static final double elevatorkD = 0;
+  public static final double elevatorkD = 0.01;
   public static final double elevatorkS = 0;
-  public static final double elevatorkG = 0.1;
+  public static final double elevatorkG = 0;
 
-  public static final double elevatorMaxHeight = 10;
+  public static final double elevatorMaxHeight = 20;
   public static final double elevatorPIDLoopTime = 0.020;
 
   public static final double coralDefaultAngle = 35;

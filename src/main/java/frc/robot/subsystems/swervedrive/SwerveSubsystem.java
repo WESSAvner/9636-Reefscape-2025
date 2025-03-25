@@ -584,7 +584,6 @@ public class SwerveSubsystem extends SubsystemBase
     if (!isRedAlliance())
     {
       resetOdometry(new Pose2d(getPose().getTranslation(), Rotation2d.fromDegrees(180)));
-      zeroGyro();
       // Set the pose 180 degrees
       System.out.println("RedAllianceTrue");
     } else

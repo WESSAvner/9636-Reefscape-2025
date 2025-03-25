@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // private TrapezoidProfile.Constraints constraints;
     private TrapezoidProfile.State goalState = new TrapezoidProfile.State();
     private TrapezoidProfile.State currentState = new TrapezoidProfile.State();
-    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(5, 1));
+    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(20, 15));
 
     private ElevatorPosition currentTarget = ElevatorPosition.DOWN;
     private boolean isHomed = false;
@@ -130,6 +130,8 @@ public class ElevatorSubsystem extends SubsystemBase {
             
             // takes the resulting output power and powers the motor
             primaryMotor.set(outputPower);
+            System.out.println(outputPower);
+
         }
 
         // Update SmartDashboard
