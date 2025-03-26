@@ -130,7 +130,6 @@ public class ElevatorSubsystem extends SubsystemBase {
             
             // takes the resulting output power and powers the motor
             primaryMotor.set(outputPower);
-            System.out.println(outputPower);
 
         }
 

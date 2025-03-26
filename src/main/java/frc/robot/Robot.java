@@ -132,6 +132,8 @@ public class Robot extends TimedRobot
   @Override
   public void autonomousPeriodic()
   {
+    System.out.println("Encoder Distance: " + RobotContainer.drivebase.getPose());
+
   }
 
   @Override
@@ -158,6 +160,9 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
+    System.out.println("Encoder Distance: " + RobotContainer.drivebase.getPose());
+
+
   }
 
   @Override
