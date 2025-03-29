@@ -43,7 +43,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     // private TrapezoidProfile.Constraints constraints;
     private TrapezoidProfile.State goalState = new TrapezoidProfile.State();
     private TrapezoidProfile.State currentState = new TrapezoidProfile.State();
-    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(20, 15));
+    private TrapezoidProfile profile = new TrapezoidProfile(new TrapezoidProfile.Constraints(50, 30));
 
     private ElevatorPosition currentTarget = ElevatorPosition.DOWN;
     private boolean isHomed = false;

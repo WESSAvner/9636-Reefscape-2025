@@ -15,27 +15,34 @@ public class CoralSubsystem extends SubsystemBase {
 
     public void coralIntakeIn() {
 
-        coralMotorLeft.set(0.5);
-        coralMotorRight.set(-0.5);
+        coralMotorLeft.set(-0.3);
+        coralMotorRight.set(0.3);
 
-        if (coralSensor.get()) {
+        // if (coralSensor.get()) {
 
-            coralTooketh = true;
+        //     coralTooketh = true;
 
-            coralMotorLeft.set(0);
-            coralMotorRight.set(0);
-            return;
+        //     coralMotorLeft.set(0);
+        //     coralMotorRight.set(0);
+        //     return;
 
-        }
+        // }
 
     }
 
     public void coralOutput() {
 
-        coralMotorLeft.set(0.5);
-        coralMotorRight.set(-0.5);
+        coralMotorLeft.set(0.3);
+        coralMotorRight.set(-0.3);
 
-        coralTooketh = false;
+        // coralTooketh = false;
+
+    }
+
+    public void coralStop() {
+
+            coralMotorLeft.set(0);
+            coralMotorRight.set(0);
 
     }
 

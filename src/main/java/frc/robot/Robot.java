@@ -4,7 +4,11 @@
 
 package frc.robot;
 
+import org.opencv.core.Mat;
+
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.cscore.CvSink;
+import edu.wpi.first.cscore.CvSource;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -37,10 +41,11 @@ public class Robot extends TimedRobot
   {
     instance = this;
 
-     UsbCamera camera = new UsbCamera("cam0",0);
-     camera.setFPS(15);
-     camera.setResolution(320, 240); //320 = width, 240 = height
-     CameraServer.startAutomaticCapture(camera);
+    // UsbCamera camera = new UsbCamera("cam0",0);
+    // camera.setResolution(320, 240); //320 = width, 240 = height
+    // camera.setFPS(15);
+    CameraServer.startAutomaticCapture();
+
   }
 
   public static Robot getInstance()
@@ -66,6 +71,7 @@ public class Robot extends TimedRobot
     {
       DriverStation.silenceJoystickConnectionWarning(true);
     }
+
   }
 
   /**
@@ -160,7 +166,7 @@ public class Robot extends TimedRobot
   @Override
   public void teleopPeriodic()
   {
-    System.out.println("Encoder Distance: " + RobotContainer.drivebase.getPose());
+    // System.out.println("Encoder Distance: " + RobotContainer.drivebase.getPose());
 
 
   }

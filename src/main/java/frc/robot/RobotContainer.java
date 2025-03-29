@@ -22,10 +22,14 @@ import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 import swervelib.SwerveInputStream;
+import frc.robot.subsystems.CoralSubsystem;
 import frc.robot.subsystems.ElevatorSubsystem;
+import frc.robot.commands.CoralIntakeIn;
+import frc.robot.commands.CoralIntakeOut;
 import frc.robot.commands.ElevatorL2; 
 import frc.robot.commands.ElevatorL3; 
 import frc.robot.commands.ElevatorResting;
+import frc.robot.commands.ElevatorTrough;
 // import frc.robot.commands.AlgaeIntakeIn;
 // import frc.robot.commands.AlgaeIntakeOut;
 // import frc.robot.commands.AngleSet;
@@ -48,8 +52,7 @@ public class RobotContainer
 
   // instantiates the subsystems into RobotContainer.
   public static final ElevatorSubsystem elevator = new ElevatorSubsystem();
-  // public static final AlgaeIntake algaeIntake = new AlgaeIntake();
-  // public static final CoralIntake coralIntake = new CoralIntake();
+  public static final CoralSubsystem coral = new CoralSubsystem();
 
   // The robot's subsystems and commands are defined here...
   public static final SwerveSubsystem       drivebase  = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
@@ -200,10 +203,11 @@ public class RobotContainer
       operatorPS4.triangle().onTrue(new ElevatorL3(elevator));
       operatorPS4.circle().onTrue(new ElevatorL2(elevator));
       operatorPS4.cross().onTrue(new ElevatorResting(elevator));
+      operatorPS4.square().onTrue(new ElevatorTrough(elevator));
 
 
-      // operatorPS4.R2().whileTrue(new AlgaeIntakeIn(algaeIntake));
-      // operatorPS4.L2().whileTrue(new AlgaeIntakeOut(algaeIntake));
+      operatorPS4.R2().whileTrue(new CoralIntakeIn(coral));
+      operatorPS4.L2().whileTrue(new CoralIntakeOut(coral));
 
       // operatorPS4.R1().onTrue(new AngleSet(coralIntake, 0));
       // operatorPS4.L1().onTrue(new AngleSet(coralIntake, -30));

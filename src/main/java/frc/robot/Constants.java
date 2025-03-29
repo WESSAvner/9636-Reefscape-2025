@@ -26,7 +26,8 @@ public final class Constants
 
   public static final double countsPerInch = 4;
   public static final double levelThreeHeight = 14;
-  public static final double levelTwoHeight = 6.5;
+  public static final double levelTwoHeight = 7;
+  public static final double levelOneHeight = 2;
   public static final double restingHeight = 0;
 
   public static final double elevatorkP = 1;

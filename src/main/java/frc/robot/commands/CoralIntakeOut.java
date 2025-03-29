@@ -16,7 +16,7 @@ public class CoralIntakeOut extends Command {
 
     @Override
     public void initialize() {
-        intakeOut.coralIntakeIn();
+        intakeOut.coralOutput();
         
     }
 
@@ -34,6 +34,6 @@ public class CoralIntakeOut extends Command {
   
     @Override
     public void end(boolean interrupted) {
-
+        intakeOut.coralStop();
     }
 }
