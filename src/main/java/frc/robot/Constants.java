@@ -25,14 +25,14 @@ public final class Constants
   public static final double MAX_SPEED  = Units.feetToMeters(13);
 
   public static final double countsPerInch = 4;
-  public static final double levelThreeHeight = 14;
+  public static final double levelThreeHeight = 15;
   public static final double levelTwoHeight = 7;
-  public static final double levelOneHeight = 2;
+  public static final double levelOneHeight = 3.5;
   public static final double restingHeight = 0;
 
-  public static final double elevatorkP = 1;
+  public static final double elevatorkP = 0.7;
   public static final double elevatorkI = 0;
-  public static final double elevatorkD = 0.01;
+  public static final double elevatorkD = 0;
   public static final double elevatorkS = 0;
   public static final double elevatorkG = 0;
 

@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandPS4Controller;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -148,6 +149,13 @@ public class RobotContainer
     configureBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
+
+    NamedCommands.registerCommand("Elevator L1", new ElevatorTrough(elevator));
+    NamedCommands.registerCommand("LET IT COOK", new WaitCommand(2.0));
+    NamedCommands.registerCommand("Elevator Resting", new ElevatorResting(elevator));
+    NamedCommands.registerCommand("Coral Intake Out", new CoralIntakeOut(coral).withTimeout(3.0));
+
+
   }
 
   /**
@@ -209,6 +217,7 @@ public class RobotContainer
       operatorPS4.R2().whileTrue(new CoralIntakeIn(coral));
       operatorPS4.L2().whileTrue(new CoralIntakeOut(coral));
 
+            
       // operatorPS4.R1().onTrue(new AngleSet(coralIntake, 0));
       // operatorPS4.L1().onTrue(new AngleSet(coralIntake, -30));
 
@@ -225,7 +234,7 @@ public class RobotContainer
   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("Move Forward Auto");
+    return drivebase.getAutonomousCommand("Trough Auto");
   }
 
   public void setMotorBrake(boolean brake)

@@ -18,12 +18,13 @@ public class ElevatorL3 extends Command {
     public void initialize() {
 
         elevatorL3.setPositionInches(Constants.levelThreeHeight);
+        System.out.println("Elevator moving to Level 3...");
+
     }
 
     @Override
     public void execute() {
 
-        System.out.println("Elevator moving to Level 3...");
 
     }
 

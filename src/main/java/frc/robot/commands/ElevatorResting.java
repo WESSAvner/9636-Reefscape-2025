@@ -19,12 +19,12 @@ public class ElevatorResting extends Command {
     public void initialize() {
 
         elevatorResting.setPositionInches(Constants.restingHeight);
+        System.out.println("Elevator moving to Base Height...");
 
     }
 
     @Override
     public void execute() {
-        System.out.println("Elevator moving to Base Height...");
     }
 
     @Override

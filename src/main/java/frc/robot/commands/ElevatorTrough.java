@@ -19,12 +19,12 @@ public class ElevatorTrough extends Command {
     public void initialize() {
 
         elevatorTrough.setPositionInches(Constants.levelOneHeight);
+        System.out.println("Elevator moving to Level One...");
 
     }
 
     @Override
     public void execute() {
-        System.out.println("Elevator moving to Level One...");
     }
 
     @Override
