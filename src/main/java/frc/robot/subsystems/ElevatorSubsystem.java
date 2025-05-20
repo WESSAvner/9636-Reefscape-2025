@@ -20,8 +20,8 @@ import frc.robot.Constants;
 public class ElevatorSubsystem extends SubsystemBase {
     private SparkMax primaryMotor = new SparkMax(3, MotorType.kBrushless);
     private SparkMax followerMotor = new SparkMax(4, MotorType.kBrushless);
+    // this is for the relative encoder that is built into the brushless motor. it gives the rotational position of it.
     private RelativeEncoder encoder = primaryMotor.getEncoder();
-    // private DigitalInput bottomLimit = new DigitalInput(5);
 
     private PIDController pidController = new PIDController(
         Constants.elevatorkP,
@@ -57,6 +57,7 @@ public class ElevatorSubsystem extends SubsystemBase {
 
     // No clue what this is, but its there.
     public enum ElevatorPosition {
+
         DOWN(0),
         POSITION_1(10),
         POSITION_2(20),

@@ -7,14 +7,18 @@ import edu.wpi.first.wpilibj.DigitalInput;
 
 
 public class CoralSubsystem extends SubsystemBase {
+
+    // this is how you instanciate a SparkMax. Device IDs are set in the rev hardware client.
     private SparkMax coralMotorLeft = new SparkMax(5, MotorType.kBrushless);
     private SparkMax coralMotorRight = new SparkMax(6, MotorType.kBrushless);
-    private DigitalInput coralSensor = new DigitalInput(2);
 
+    // this stuff is for the sensor we were supposed to use, but we didnt, so its unused.
+    private DigitalInput coralSensor = new DigitalInput(2);
     private boolean coralTooketh = false;
 
     public void coralIntakeIn() {
 
+        // the "motor.set(speed:);" command sets the motors to a specific speed from -1 to 1. these are going in opposite direction because of the physical orientation of them on the robot.
         coralMotorLeft.set(-0.3);
         coralMotorRight.set(0.3);
 

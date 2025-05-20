@@ -53,6 +53,17 @@ import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
 
+/*
+
+
+
+ * IF YOU ARE STILL USING PS4 CONTROLLERS, JUST COPY PASTE THIS INTO YOUR NEXT PROJECT, I THINK IT WILL BE OK!!
+ 
+
+
+ 
+ */
+
 public class SwerveSubsystem extends SubsystemBase
 {
 
